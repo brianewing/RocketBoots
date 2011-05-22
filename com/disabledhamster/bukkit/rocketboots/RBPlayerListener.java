@@ -28,14 +28,14 @@ public class RBPlayerListener extends PlayerListener {
         if(player.isSneaking()) {
             Material playerBoots = Util.getPlayerBoots(player);
 
-            if(Material.GOLD_BOOTS.equals(playerBoots) || Material.CHAINMAIL_BOOTS.equals(playerBoots)) {
+            if((Material.GOLD_BOOTS.equals(playerBoots) && permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && permissions.canUseChainmailBoots(player))) {
                 Location playerLocation = player.getLocation();
                 Vector playerDirection = playerLocation.getDirection();
 
                 int speed = 1;
-                if(Material.GOLD_BOOTS.equals(playerBoots) && permissions.canUseGoldBoots(player))
+                if(Material.GOLD_BOOTS.equals(playerBoots))
                     speed = 2;
-                else if(Material.CHAINMAIL_BOOTS.equals(playerBoots) && permissions.canUseChainmailBoots(player))
+                else if(Material.CHAINMAIL_BOOTS.equals(playerBoots))
                     speed = 6;
 
                 playerDirection.multiply(speed);
@@ -58,7 +58,7 @@ public class RBPlayerListener extends PlayerListener {
                 
                 player.setVelocity(playerDirection);
             }  else if(Material.IRON_BOOTS.equals(playerBoots) && permissions.canUseIronBoots(player)) {
-                List<Entity> nearbyEntities = player.getNearbyEntities(10, 3, 10);
+                List<Entity> nearbyEntities = player.getNearbyEntities(12, 5, 12);
 
                 Location playerLocation = player.getLocation();
                 for(Entity entity : nearbyEntities) {

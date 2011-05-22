@@ -34,7 +34,7 @@ public class RBEntityListener extends EntityListener {
                     event.setCancelled(true);
                     Location playerLocation = player.getLocation();
 
-                    int times = 10;
+                    int times = 5;
                     for(int i=0; i<times; i++)
                         player.getWorld().strikeLightning(playerLocation);
                 }

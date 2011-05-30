@@ -4,6 +4,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -64,6 +65,8 @@ public class RBPlayerListener extends PlayerListener {
                 for(Entity entity : nearbyEntities) {
                     if(entity instanceof Player && !permissions.canLaunchPlayers(player))
                         continue;
+                    else if(!(entity instanceof LivingEntity))
+                        continue;
                     
                     Location entityLocation = entity.getLocation();
 
@@ -106,12 +109,14 @@ public class RBPlayerListener extends PlayerListener {
         if(Material.LEATHER_BOOTS.equals(Util.getPlayerBoots(player)) && permissions.canUseLeatherBoots(player)) {
             Entity entity = event.getRightClicked();
 
-            if(!(entity instanceof Player) || permissions.canLaunchPlayers(player)) {
-                // Launch the entity :)
+            if(entity instanceof LivingEntity) {
+                if(!(entity instanceof Player) || permissions.canLaunchPlayers(player)) {
+                    // Launch the entity :)
 
-                Vector entityVelocity = entity.getVelocity();
-                entityVelocity.setY(2);
-                entity.setVelocity(entityVelocity);
+                    Vector entityVelocity = entity.getVelocity();
+                    entityVelocity.setY(2);
+                    entity.setVelocity(entityVelocity);
+                }
             }
         }
     }

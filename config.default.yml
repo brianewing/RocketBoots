@@ -1,0 +1,30 @@
+# RocketBoots config file
+# -----------------------
+
+# Can players disable RocketBoots for themselves? (/rocketboots off|on)
+# This is useful if you have a survival/PvP server where players wear boots
+# for protection, and not just RocketBoots
+playersCanDisable: true
+
+boots:
+    chainmail:
+        # How many lightning strikes should the chainmail boots strike with when you land?
+        # More lightning strikes => more damage, more noise
+        # Set this to zero to disable lightning strikes
+        # Default 5, max 20
+        numLightningStrikes: 5
+
+        # Use real lightning, or just the effect when you land
+        realLightning: true
+
+    leather:
+        # How fast should animals/players/mobs be launched into the air with
+        #   leather boots?
+        # Default 20. Minimum 10, max 50
+        launchSpeed: 20
+    
+    iron:
+        # How fast should animals/players/mob be launched *upwards* with iron boots?
+        #   (this doesn't affect their speed away from you, just how high they'll go)
+        # Default 10. Minimum 1, max 50
+        verticalSpeed: 10

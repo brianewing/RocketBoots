@@ -2,4 +2,13 @@ name: RocketBoots
 main: com.disabledhamster.bukkit.rocketboots.RocketBoots
 description: Various rocket boots, fun and useful, for flying around your server
 author: DisabledHamster
-version: 0.2.5
+version: 0.4
+
+commands:
+    rocketboots:
+        description: Disable or enable RocketBoots (for yourself)
+        usage: /<command> [on|off]
+    rb:
+        # alias of /rocketboots
+        description: Disable or enable RocketBoots (for yourself)
+        usage: /<command> [on|off]

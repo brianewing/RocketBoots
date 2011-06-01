@@ -70,33 +70,11 @@ public class RBPlayerListener extends PlayerListener {
                     
                     Location entityLocation = entity.getLocation();
 
-                    /*
-                     * This calculation is incorrect. It's supposed to calculate
-                     * the Vector going "away" from the player, but the result
-                     * is similar to what it's supposed to do, anyway, so I'm
-                     * happy with it.
-                     */
+                    // sk89q's Vector class makes this easy ;)
+                    Vector vectorAway = entityLocation.toVector().subtract(playerLocation.toVector());
+                    vectorAway.setY(1);
 
-                    double dX = entityLocation.getX() - playerLocation.getX();
-                    double dZ = entityLocation.getZ() - playerLocation.getZ();
-                    double angle = Math.atan(dZ / dX);
-                    double angleDegrees = Math.toDegrees(angle);
-
-                    int speed = 2;
-
-                    double speedX = speed * Math.cos(angleDegrees);
-                    double speedZ = speed * Math.sin(angleDegrees);
-
-                    if(dX < 0)
-                        speedX *= -1.0;
-                    if(dZ < 0)
-                        speedZ *= -1.0;
-
-                    Vector entityVelocity = entity.getVelocity();
-                    entityVelocity.setX(speedX);
-                    entityVelocity.setZ(speedZ);
-                    entityVelocity.setY(0.7);
-                    entity.setVelocity(entityVelocity);
+                    entity.setVelocity(vectorAway);
                 }
             }
         }

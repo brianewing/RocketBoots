@@ -1,4 +1,5 @@
 name: RocketBoots
 main: com.disabledhamster.bukkit.rocketboots.RocketBoots
 description: Various rocket boots, fun and useful, for flying around your server
-version: 0.2.3
+author: DisabledHamster
+version: 0.2.5

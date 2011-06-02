@@ -46,6 +46,9 @@ public final class RBConfiguration {
         } catch(IOException ioe) {
             plugin.getLogger().log(Level.WARNING, "Couldn't create default config file, using default values", ioe);
             return;
+        } catch(NullPointerException npe) { // getResourceAsStream returns null under certain reload conditions (reloaded updated plugin)
+            plugin.getLogger().log(Level.WARNING, "Couldn't create default config file (Bukkit bug?), using default values");
+            configFile.delete();
         }
     }
 

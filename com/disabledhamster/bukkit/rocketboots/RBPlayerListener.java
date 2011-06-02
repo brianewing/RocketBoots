@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
@@ -112,6 +113,24 @@ public class RBPlayerListener extends PlayerListener {
                     entityVelocity.setY(launchSpeed);
                     entity.setVelocity(entityVelocity);
                 }
+            }
+        }
+    }
+
+    @Override
+    public void onPlayerKick(PlayerKickEvent event) {
+        if(event.isCancelled())
+            return;
+
+        if(!config.preventFlightKick())
+            return;
+
+        if(event.getReason().equals("Flying is not enabled on this server")) {
+            Player player = event.getPlayer();
+            
+            Material playerBoots = Util.getPlayerBoots(player);
+            if((Material.GOLD_BOOTS.equals(playerBoots) && permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && permissions.canUseChainmailBoots(player)) || (Material.DIAMOND_BOOTS.equals(playerBoots) && permissions.canUseDiamondBoots(player))) {
+                event.setCancelled(true);
             }
         }
     }

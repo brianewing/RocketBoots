@@ -6,6 +6,19 @@
 # for protection, and not just RocketBoots
 playersCanDisable: true
 
+# With this enabled, RocketBoots will stop the server from kicking you
+# for flying when flight is disabled on the server.
+#
+# This is very hacky, and *the server will flood your console with warnings*
+# like "[WARNING] Player was kicked for floating too long" as RocketBoots
+# prevents each kick. This is unavoidable, but it's the only way to let you fly
+# with "allow-flight=false". Also, while preventing this flood of kicks,
+# flying will become laggy and slow for everyone with the gold and chainmail boots
+#
+# If you are sure you want to enable this hack (and realise that it'll make the boots
+# less smooth), set this to true ;)
+preventFlightKick: false
+
 boots:
     chainmail:
         # How many lightning strikes should the chainmail boots strike with when you land?

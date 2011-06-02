@@ -100,4 +100,8 @@ public final class RBConfiguration {
         config.save();
     }
 
+    public boolean preventFlightKick() {
+        return config.getBoolean("preventFlightKick", true);
+    }
+
 }

@@ -28,6 +28,7 @@ public class RocketBoots extends JavaPlugin {
         getServer().getPluginManager().registerEvent(Type.PLAYER_TOGGLE_SNEAK, playerListener, Priority.Monitor, this);
         getServer().getPluginManager().registerEvent(Type.PLAYER_MOVE, playerListener, Priority.Monitor, this);
         getServer().getPluginManager().registerEvent(Type.PLAYER_INTERACT_ENTITY, playerListener, Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.PLAYER_INTERACT, playerListener, Priority.Monitor, this);
 
         getServer().getPluginManager().registerEvent(Type.PLAYER_KICK, playerListener, Priority.Normal, this);
         getServer().getPluginManager().registerEvent(Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);

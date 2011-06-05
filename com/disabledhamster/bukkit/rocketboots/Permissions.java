@@ -53,6 +53,13 @@ public class Permissions {
             return player.isOp();
     }
 
+    public boolean canUseFeather(Player player) {
+        if(permissions != null)
+            return permissions.has(player, "rocketboots.feather");
+        else
+            return player.isOp();
+    }
+
     public boolean canLaunchPlayers(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.launchPlayers");

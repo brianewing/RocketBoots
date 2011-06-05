@@ -152,7 +152,7 @@ public class RBPlayerListener extends PlayerListener {
 
     @Override
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(Action.RIGHT_CLICK_AIR.equals(event.getAction()) || Action.LEFT_CLICK_AIR.equals(event.getAction())) {
+        if(Action.RIGHT_CLICK_AIR.equals(event.getAction())) {
             Player player = event.getPlayer();
             Material playerBoots = Util.getPlayerBoots(player);
 

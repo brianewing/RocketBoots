@@ -78,8 +78,12 @@ public class RBPlayerListener extends PlayerListener {
 
             if(Material.DIAMOND_BOOTS.equals(playerBoots) && permissions.canUseDiamondBoots(player)) {
                 Vector playerDirection = player.getLocation().getDirection();
-                playerDirection.multiply(0.5);
-                playerDirection.setY(0.6);
+
+                double speedMultiplier = config.diamondBootsSpeedMultiplier();
+                double verticalSpeed = config.diamondBootsVerticalSpeed();
+                
+                playerDirection.multiply(speedMultiplier);
+                playerDirection.setY(verticalSpeed);
                 
                 player.setVelocity(playerDirection);
             }  else if(Material.IRON_BOOTS.equals(playerBoots) && permissions.canUseIronBoots(player)) {

@@ -87,6 +87,28 @@ public final class RBConfiguration {
         return (double)number / (double)10;
     }
 
+    public double diamondBootsVerticalSpeed() {
+        int number = config.getInt("boots.diamond.verticalSpeed", 60);
+
+        if(number < 10)
+            number = 10;
+        else if(number > 100)
+            number = 100;
+
+        return (double)number / (double)100;
+    }
+
+    public double diamondBootsSpeedMultiplier() {
+        int number = config.getInt("boots.diamond.speedMultiplier", 50);
+
+        if(number < 10)
+            number = 10;
+        else if(number > 100)
+            number = 100;
+
+        return (double)number / (double)100;
+    }
+
     public boolean playersCanDisable() {
         return config.getBoolean("playersCanDisable", true);
     }

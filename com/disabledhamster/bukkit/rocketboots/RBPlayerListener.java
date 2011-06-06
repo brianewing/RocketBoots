@@ -162,12 +162,14 @@ public class RBPlayerListener extends PlayerListener {
                     Location playerLocation = player.getLocation();
                     Block blockBelow = playerLocation.getBlock().getRelative(BlockFace.DOWN);
 
-                    if(player.isSneaking())
-                        haltedPlayers.add(player); // players in this list can't fly until they toggle sneak
+                    if(blockBelow.getType().equals(Material.AIR)) {
+                        if(player.isSneaking())
+                            haltedPlayers.add(player); // players in this list can't fly until they toggle sneak
 
-                    player.sendBlockChange(blockBelow.getLocation(), Material.GLASS, (byte)0);
-                    player.setVelocity(new Vector(0, 0, 0));
-                    player.teleport(playerLocation);
+                        player.sendBlockChange(blockBelow.getLocation(), Material.GLASS, (byte)0);
+                        player.setVelocity(new Vector(0, 0, 0));
+                        player.teleport(playerLocation);
+                    }
                 }
             }
         }

@@ -17,13 +17,13 @@ permissions:
     rocketboots.*:
         description: Give all permissions
         children:
-            rocketboots.boots.gold
-            rocketboots.boots.leather
-            rocketboots.boots.chainmail
-            rocketboots.boots.diamond
-            rocketboots.boots.iron
-            rocketboots.feather
-            rocketboots.launchPlayers
+            rocketboots.boots.gold: true
+            rocketboots.boots.leather: true
+            rocketboots.boots.chainmail: true
+            rocketboots.boots.diamond: true
+            rocketboots.boots.iron: true
+            rocketboots.feather: true
+            rocketboots.launchPlayers: true
     rocketboots.boots.gold:
         description: Can use gold boots
         default: op

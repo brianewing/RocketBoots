@@ -12,3 +12,36 @@ commands:
         # alias of /rocketboots
         description: Disable or enable RocketBoots (for yourself)
         usage: /<command> [on|off]
+
+permissions:
+    rocketboots.*:
+        description: Give all permissions
+        children:
+            rocketboots.boots.gold
+            rocketboots.boots.leather
+            rocketboots.boots.chainmail
+            rocketboots.boots.diamond
+            rocketboots.boots.iron
+            rocketboots.feather
+            rocketboots.launchPlayers
+    rocketboots.boots.gold:
+        description: Can use gold boots
+        default: op
+    rocketboots.boots.leather:
+        description: Can use leather boots
+        default: op
+    rocketboots.boots.chainmail:
+        description: Can use chainmail boots
+        default: op
+    rocketboots.boots.diamond:
+        description: Can use diamond boots
+        default: op
+    rocketboots.boots.iron:
+        description: Can use iron boots
+        default: op
+    rocketboots.feather:
+        description: Can use the feather to stop in mid-air while flying
+        default: op
+    rocketboots.launchPlayers:
+        description: Can launch players when using iron / leather boots (without this, only animals / mobs will be launched)
+        default: op

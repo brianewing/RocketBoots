@@ -22,49 +22,49 @@ public class Permissions {
         if(permissions != null)
             return permissions.has(player, "rocketboots.boots.gold");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.boots.gold");
     }
 
     public boolean canUseLeatherBoots(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.boots.leather");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.boots.leather");
     }
 
     public boolean canUseChainmailBoots(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.boots.chainmail");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.boots.chainmail");
     }
 
     public boolean canUseDiamondBoots(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.boots.diamond");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.boots.diamond");
     }
 
     public boolean canUseIronBoots(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.boots.iron");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.boots.iron");
     }
 
     public boolean canUseFeather(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.feather");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.feather");
     }
 
     public boolean canLaunchPlayers(Player player) {
         if(permissions != null)
             return permissions.has(player, "rocketboots.launchPlayers");
         else
-            return player.isOp();
+            return player.hasPermission("rocketboots.launchPlayers");
     }
 
 }

@@ -7,11 +7,12 @@ import org.bukkit.inventory.ItemStack;
 public class Util {
 
     public static Material getPlayerBoots(Player player) {
-        ItemStack boots = player.getInventory().getBoots();
-        if(boots.getAmount() > 0)
+        final ItemStack boots = player.getInventory().getBoots();
+        if (boots.getAmount() > 0) {
             return boots.getType();
-        else
+        } else {
             return null;
+        }
     }
 
 }

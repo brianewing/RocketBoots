@@ -26,8 +26,8 @@ public class RBPlayerListener implements Listener {
     // (for when player stops in mid-air, to stop them immediately flying off the block)
     private final List<Player> haltedPlayers = new ArrayList<Player>();
 
-    public RBPlayerListener(RocketBoots plugin) {
-        this.config = plugin.getRBConfig();
+    public RBPlayerListener(RBConfiguration config) {
+        this.config = config;
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

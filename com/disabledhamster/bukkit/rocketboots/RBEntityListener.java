@@ -13,8 +13,8 @@ public class RBEntityListener implements Listener {
 
     private final RBConfiguration config;
 
-    public RBEntityListener(RocketBoots plugin) {
-        this.config = plugin.getRBConfig();
+    public RBEntityListener(RBConfiguration config) {
+        this.config = config;
     }
 
     @EventHandler
@@ -31,7 +31,6 @@ public class RBEntityListener implements Listener {
                     final Location playerLocation = player.getLocation();
                     final int times = this.config.numberLightningStrikes();
                     final boolean useRealLightning = this.config.strikeRealLightning();
-
                     for (int i = 0; i < times; i++) {
                         if (useRealLightning) {
                             player.getWorld().strikeLightning(playerLocation);

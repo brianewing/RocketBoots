@@ -12,7 +12,7 @@ public class RocketBootsCommand implements CommandExecutor {
     private RBConfiguration config;
 
     public RocketBootsCommand(RocketBoots plugin) {
-        this.config = plugin.getConfig();
+        this.config = plugin.getRBConfig();
     }
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

@@ -5,13 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
+
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.util.config.Configuration;
 
 public final class RBConfiguration {
 
     private RocketBoots plugin;
-    private Configuration config;
+    private FileConfiguration config;
 
     public RBConfiguration(RocketBoots plugin) {
         this.plugin = plugin;
@@ -24,8 +25,7 @@ public final class RBConfiguration {
         if(!configFile.exists())
             createDefaultConfigFile(configFile);
 
-        this.config = new Configuration(configFile);
-        this.config.load();
+        this.config = plugin.getConfig();
     }
 
     private void createDefaultConfigFile(File configFile) {
@@ -118,8 +118,8 @@ public final class RBConfiguration {
     }
 
     public void setPlayerEnabled(Player player, boolean enabled) {
-        config.setProperty("players." + player.getName() + ".enabled", enabled);
-        config.save();
+        config.set("players." + player.getName() + ".enabled", enabled);
+        plugin.saveConfig();
     }
 
     public boolean preventFlightKick() {

@@ -9,20 +9,20 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class RBPlayerListener extends PlayerListener {
+public class RBPlayerListener implements Listener {
 
-    private RocketBoots plugin;
-    private Permissions permissions;
     private RBConfiguration config;
     
     // list of players that can't fly until they next sneak
@@ -30,12 +30,10 @@ public class RBPlayerListener extends PlayerListener {
     private List<Player> haltedPlayers = new ArrayList<Player>();
 
     public RBPlayerListener(RocketBoots plugin) {
-        this.plugin = plugin;
-        this.permissions = plugin.getPermissions();
-        this.config = plugin.getConfig();
+        this.config = plugin.getRBConfig();
     }
 
-    @Override
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onPlayerMove(PlayerMoveEvent event) {
         if(event.isCancelled())
             return;
@@ -45,7 +43,7 @@ public class RBPlayerListener extends PlayerListener {
         if(player.isSneaking() && !haltedPlayers.contains(player)) {
             Material playerBoots = Util.getPlayerBoots(player);
 
-            if((Material.GOLD_BOOTS.equals(playerBoots) && permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && permissions.canUseChainmailBoots(player))) {
+            if((Material.GOLD_BOOTS.equals(playerBoots) && Permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && Permissions.canUseChainmailBoots(player))) {
                 if(config.playerEnabled(player)) {
                     Location playerLocation = player.getLocation();
                     Vector playerDirection = playerLocation.getDirection();
@@ -63,7 +61,7 @@ public class RBPlayerListener extends PlayerListener {
         }
     }
 
-    @Override
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
         if(event.isCancelled())
             return;
@@ -76,7 +74,7 @@ public class RBPlayerListener extends PlayerListener {
         if(player.isSneaking() && config.playerEnabled(player)) {
             Material playerBoots = Util.getPlayerBoots(player);
 
-            if(Material.DIAMOND_BOOTS.equals(playerBoots) && permissions.canUseDiamondBoots(player)) {
+            if(Material.DIAMOND_BOOTS.equals(playerBoots) && Permissions.canUseDiamondBoots(player)) {
                 Vector playerDirection = player.getLocation().getDirection();
 
                 double speedMultiplier = config.diamondBootsSpeedMultiplier();
@@ -86,12 +84,12 @@ public class RBPlayerListener extends PlayerListener {
                 playerDirection.setY(verticalSpeed);
                 
                 player.setVelocity(playerDirection);
-            }  else if(Material.IRON_BOOTS.equals(playerBoots) && permissions.canUseIronBoots(player)) {
+            }  else if(Material.IRON_BOOTS.equals(playerBoots) && Permissions.canUseIronBoots(player)) {
                 List<Entity> nearbyEntities = player.getNearbyEntities(12, 5, 12);
 
                 Location playerLocation = player.getLocation();
                 for(Entity entity : nearbyEntities) {
-                    if(entity instanceof Player && !permissions.canLaunchPlayers(player))
+                    if(entity instanceof Player && !Permissions.canLaunchPlayers(player))
                         continue;
                     else if(!(entity instanceof LivingEntity))
                         continue;
@@ -110,18 +108,18 @@ public class RBPlayerListener extends PlayerListener {
         }
     }
 
-    @Override
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if(event.isCancelled())
             return;
 
         Player player = event.getPlayer();
 
-        if(Material.LEATHER_BOOTS.equals(Util.getPlayerBoots(player)) && permissions.canUseLeatherBoots(player) && config.playerEnabled(player)) {
+        if(Material.LEATHER_BOOTS.equals(Util.getPlayerBoots(player)) && Permissions.canUseLeatherBoots(player) && config.playerEnabled(player)) {
             Entity entity = event.getRightClicked();
 
             if(entity instanceof LivingEntity) {
-                if(!(entity instanceof Player) || permissions.canLaunchPlayers(player)) {
+                if(!(entity instanceof Player) || Permissions.canLaunchPlayers(player)) {
                     Vector entityVelocity = entity.getVelocity();
 
                     double launchSpeed = config.leatherBootsSpeed();
@@ -132,7 +130,7 @@ public class RBPlayerListener extends PlayerListener {
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerKick(PlayerKickEvent event) {
         if(event.isCancelled())
             return;
@@ -144,21 +142,21 @@ public class RBPlayerListener extends PlayerListener {
             Player player = event.getPlayer();
             
             Material playerBoots = Util.getPlayerBoots(player);
-            if((Material.GOLD_BOOTS.equals(playerBoots) && permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && permissions.canUseChainmailBoots(player)) || (Material.DIAMOND_BOOTS.equals(playerBoots) && permissions.canUseDiamondBoots(player))) {
+            if((Material.GOLD_BOOTS.equals(playerBoots) && Permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && Permissions.canUseChainmailBoots(player)) || (Material.DIAMOND_BOOTS.equals(playerBoots) && Permissions.canUseDiamondBoots(player))) {
                 event.setCancelled(true);
             }
         }
     }
 
-    @Override
+    @EventHandler(priority=EventPriority.MONITOR)
     public void onPlayerInteract(PlayerInteractEvent event) {
         if(Action.RIGHT_CLICK_AIR.equals(event.getAction())) {
             Player player = event.getPlayer();
             Material playerBoots = Util.getPlayerBoots(player);
 
             ItemStack itemInHand = player.getItemInHand();
-            if(Material.FEATHER.equals(itemInHand.getType()) && permissions.canUseFeather(player)) {
-                if((Material.GOLD_BOOTS.equals(playerBoots) && permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && permissions.canUseChainmailBoots(player)) || (Material.DIAMOND_BOOTS.equals(playerBoots) && permissions.canUseDiamondBoots(player))) {
+            if(Material.FEATHER.equals(itemInHand.getType()) && Permissions.canUseFeather(player)) {
+                if((Material.GOLD_BOOTS.equals(playerBoots) && Permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && Permissions.canUseChainmailBoots(player)) || (Material.DIAMOND_BOOTS.equals(playerBoots) && Permissions.canUseDiamondBoots(player))) {
                     Location playerLocation = player.getLocation();
                     Block blockBelow = playerLocation.getBlock().getRelative(BlockFace.DOWN);
 

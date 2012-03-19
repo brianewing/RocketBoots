@@ -66,6 +66,7 @@ public class RBPlayerListener implements Listener {
         }
         if (player.isSneaking() && this.config.playerEnabled(player)) {
             final Material playerBoots = Util.getPlayerBoots(player);
+            if (playerBoots == null) return;
             if (Material.DIAMOND_BOOTS.equals(playerBoots) && Permissions.canUseDiamondBoots(player)) {
                 final Vector playerDirection = player.getLocation().getDirection();
                 final double speedMultiplier = this.config.diamondBootsSpeedMultiplier();
@@ -135,6 +136,7 @@ public class RBPlayerListener implements Listener {
         if (Action.RIGHT_CLICK_AIR.equals(event.getAction())) {
             final Player player = event.getPlayer();
             final Material playerBoots = Util.getPlayerBoots(player);
+            if (playerBoots == null) return;
             final ItemStack itemInHand = player.getItemInHand();
             if (Material.FEATHER.equals(itemInHand.getType()) && Permissions.canUseFeather(player)) {
                 if ((Material.GOLD_BOOTS.equals(playerBoots) && Permissions.canUseGoldBoots(player)) || (Material.CHAINMAIL_BOOTS.equals(playerBoots) && Permissions.canUseChainmailBoots(player)) || (Material.DIAMOND_BOOTS.equals(playerBoots) && Permissions.canUseDiamondBoots(player))) {

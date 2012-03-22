@@ -10,5 +10,4 @@ public class Util {
 		final ItemStack boots = player.getInventory().getBoots();
 		return boots != null ? boots.getType() : null;
 	}
-
 }
